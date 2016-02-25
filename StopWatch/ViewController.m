@@ -35,8 +35,8 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.counter = 0;
-        self.timeLabel.text = @"0";
+        self.counter = 0.0;
+        self.timeLabel.text = @"0.0";
         self.isPlaying = false;
         self.pauseBtn.enabled = NO;
     }
@@ -45,8 +45,9 @@
 
 - (void)updateTimer:(NSTimer *)timer {
     NSLog(@"%s" , __func__);
-    int counter = self.timeLabel.text.intValue;
-    self.timeLabel.text = [NSString stringWithFormat:@"%d", ++counter];
+    float counter = self.timeLabel.text.floatValue; // 之前没成功原来是忘了改floatValue....
+    counter += 0.1;
+    self.timeLabel.text = [NSString stringWithFormat:@"%.1f", counter];
 }
 
 - (IBAction)play {
@@ -55,26 +56,26 @@
     }
     self.playBtn.enabled = NO;
     self.pauseBtn.enabled = YES;
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateTimer:) userInfo:nil repeats:true];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateTimer:) userInfo:nil repeats:true];
     self.isPlaying = YES;
-    
+    NSLog(@"play!");
 }
 
 - (IBAction)pause {
-    NSLog(@"pause!");
     self.playBtn.enabled = YES;
     self.pauseBtn.enabled = NO;
     [self.timer invalidate];
     self.isPlaying = NO;
+    NSLog(@"pause!");
 }
 
 - (IBAction)reset {
     [self.timer invalidate];
-    self.timeLabel.text = @"0";
+    self.timeLabel.text = @"0.0";
     self.playBtn.enabled = YES;
     self.pauseBtn.enabled = NO;
     self.isPlaying = NO;
-    
+    NSLog(@"reset!");
 }
 
 - (void)viewDidLoad {
