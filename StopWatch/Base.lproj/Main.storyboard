@@ -45,6 +45,9 @@
                                         <state key="normal" title="Reset">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="reset" destination="BYZ-38-t0r" eventType="touchUpInside" id="ocv-Wf-ZcB"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XmV-xV-o60" userLabel="Time Label">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="267"/>
@@ -60,6 +63,8 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="pauseBtn" destination="ukj-Tb-3eM" id="WxK-f5-XBq"/>
+                        <outlet property="playBtn" destination="sjp-z3-cxk" id="2IK-ji-aPL"/>
                         <outlet property="resetBtn" destination="rTM-Eq-gcW" id="PCg-po-PWO"/>
                         <outlet property="timeLabel" destination="XmV-xV-o60" id="Wdy-0h-eaL"/>
                     </connections>

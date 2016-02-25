@@ -8,13 +8,20 @@
 
 #import "ViewController.h"
 
+/*
+ 还要实现小数计时
+ 
+ */
+
 @interface ViewController ()
 
 @property (weak, nonatomic) IBOutlet UIButton *resetBtn;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet UIButton *playBtn;
+@property (weak, nonatomic) IBOutlet UIButton *pauseBtn;
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic) NSInteger counter;
-
+@property (nonatomic) BOOL isPlaying;
 
 @end
 
@@ -30,6 +37,8 @@
     if (self) {
         self.counter = 0;
         self.timeLabel.text = @"0";
+        self.isPlaying = false;
+        self.pauseBtn.enabled = NO;
     }
     return self;
 }
@@ -41,14 +50,32 @@
 }
 
 - (IBAction)play {
+    if (self.isPlaying) {
+        return;
+    }
+    self.playBtn.enabled = NO;
+    self.pauseBtn.enabled = YES;
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateTimer:) userInfo:nil repeats:true];
+    self.isPlaying = YES;
+    
 }
 
 - (IBAction)pause {
     NSLog(@"pause!");
+    self.playBtn.enabled = YES;
+    self.pauseBtn.enabled = NO;
     [self.timer invalidate];
+    self.isPlaying = NO;
 }
 
+- (IBAction)reset {
+    [self.timer invalidate];
+    self.timeLabel.text = @"0";
+    self.playBtn.enabled = YES;
+    self.pauseBtn.enabled = NO;
+    self.isPlaying = NO;
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
