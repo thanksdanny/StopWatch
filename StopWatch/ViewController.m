@@ -32,7 +32,7 @@
 
 - (IBAction)pause {
     NSLog(@"pause!");
-    [self pause];
+    [self.timer invalidate];
 }
 
 
