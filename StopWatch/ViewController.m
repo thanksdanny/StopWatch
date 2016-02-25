@@ -13,11 +13,26 @@
 @property (weak, nonatomic) IBOutlet UIButton *resetBtn;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic) NSInteger counter;
 
 
 @end
 
 @implementation ViewController
+
+- (NSTimer *)timer {
+    if (!_timer) _timer = [[NSTimer alloc] init];
+    return _timer;
+}
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.counter = 0;
+        self.timeLabel.text = @"0";
+    }
+    return self;
+}
 
 - (void)updateTimer:(NSTimer *)timer {
     NSLog(@"%s" , __func__);
@@ -26,7 +41,6 @@
 }
 
 - (IBAction)play {
-    self.timeLabel.text = @"0";
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateTimer:) userInfo:nil repeats:true];
 }
 
